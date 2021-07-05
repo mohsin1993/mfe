@@ -20,6 +20,8 @@ jobs:
       #   id: ACTIONS_ALLOW_UNSECURE_COMMANDS
       #   run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
       - uses: actions/checkout@v2
+      - run: echo ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - run: echo ${{ secrets.ACCESS_KEY_ID }}
       - run: npm install
       - run: npm run build
       - run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
@@ -27,6 +29,5 @@ jobs:
       - run: echo ${{ secrets.AWS_S3_BUCKET_NAME }}
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
         env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
           ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
