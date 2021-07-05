@@ -2,7 +2,7 @@ name: deploy-container
 
 on:
   push:
-    branch:
+    branches:
       - master
     paths:
       - 'packages/container/**'
