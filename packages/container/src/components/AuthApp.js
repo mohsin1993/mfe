@@ -1,8 +1,8 @@
 import React, {useEffect, useLayoutEffect, useRef} from "react";
-import {mount} from "marketing/MarketingApp";
+import {mount} from "auth/AuthApp";
 import {useHistory} from "react-router-dom";
 
-export default () => {
+export default ({onSignIn}) => {
     const ref = useRef(null);
     const history = useHistory();
     const historyRef = useRef(history);
@@ -15,8 +15,9 @@ export default () => {
         const currentHistory = historyRef.current;
         const options = mount(ref.current, {
             initialPath: currentHistory.location.pathname,
+            onSignIn,
             onNavigate: ({pathname: nextPathname}) => {
-                console.log("marketing navigated");
+                console.log("auth navigated");
                 if (currentHistory.location.pathname !== nextPathname)
                     currentHistory.push(nextPathname);
             },
